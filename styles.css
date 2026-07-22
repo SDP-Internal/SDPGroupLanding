@@ -1,0 +1,247 @@
+/* ===========================================================
+   SDP Group — Coming Soon
+   Dark / gold luxury aesthetic. HTML + CSS only.
+   =========================================================== */
+
+:root {
+    --bg:            #080808;
+    --bg-soft:       #0e0e0e;
+    --gold:          #d9b26a;
+    --gold-bright:   #f4e3b8;
+    --gold-deep:     #a67c34;
+    --text:          #e9e4d8;
+    --text-dim:      #8c877c;
+    --maxw:          760px;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(1.5rem, 5vw, 4rem);
+    font-family: "Jost", system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(120% 90% at 50% 8%, #171512 0%, var(--bg-soft) 38%, var(--bg) 100%);
+    background-color: var(--bg);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Soft gold ambient glow behind the composition */
+.glow {
+    position: fixed;
+    top: 34%;
+    left: 50%;
+    width: min(90vw, 780px);
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle,
+        rgba(217, 178, 106, 0.16) 0%,
+        rgba(217, 178, 106, 0.05) 34%,
+        transparent 66%);
+    filter: blur(14px);
+    pointer-events: none;
+    z-index: 0;
+    animation: breathe 9s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    0%, 100% { opacity: 0.75; transform: translate(-50%, -50%) scale(1); }
+    50%      { opacity: 1;    transform: translate(-50%, -50%) scale(1.06); }
+}
+
+/* Very subtle film-grain texture for depth */
+.grain {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---- Stage ---- */
+.stage {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: var(--maxw);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    animation: rise 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes rise {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Logo ---- */
+.logo-wrap {
+    width: clamp(248px, 60vw, 432px);
+    line-height: 0;
+    margin: clamp(-0.8rem, -2.5vw, -0.2rem) 0 clamp(0.2rem, 1vw, 0.7rem);
+}
+
+.logo {
+    width: 100%;
+    height: auto;
+    /* Source art carries a warm dark base; screen blend drops it and
+       lets only the gold mark + soft halo glow over our background. */
+    mix-blend-mode: screen;
+}
+
+/* ---- Text content ---- */
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.eyebrow {
+    margin: 0 0 0.95rem;
+    font-weight: 300;
+    font-size: clamp(0.72rem, 2.4vw, 0.86rem);
+    letter-spacing: 0.62em;
+    text-indent: 0.62em;
+    color: var(--gold);
+    text-transform: uppercase;
+}
+
+.headline {
+    margin: 0;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2.15rem, 9.2vw, 5.4rem);
+    line-height: 1.04;
+    letter-spacing: 0.03em;
+    max-width: 100%;
+    background: linear-gradient(100deg,
+        var(--gold-deep) 0%,
+        var(--gold-bright) 28%,
+        var(--gold) 52%,
+        var(--gold-bright) 74%,
+        var(--gold-deep) 100%);
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: shimmer 7s linear infinite;
+}
+
+@keyframes shimmer {
+    to { background-position: 220% center; }
+}
+
+/* Divider with centred diamond */
+.rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.9rem;
+    width: min(280px, 72%);
+    margin: clamp(1.2rem, 3.5vw, 1.8rem) 0 clamp(1.2rem, 3.5vw, 1.7rem);
+}
+
+.rule::before,
+.rule::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(217, 178, 106, 0.55), transparent);
+}
+
+.rule span {
+    width: 6px;
+    height: 6px;
+    flex: none;
+    transform: rotate(45deg);
+    background: var(--gold);
+    box-shadow: 0 0 10px rgba(217, 178, 106, 0.7);
+}
+
+.tagline {
+    margin: 0 0 clamp(2.2rem, 6vw, 2.8rem);
+    max-width: 30ch;
+    font-weight: 300;
+    font-size: clamp(0.95rem, 3vw, 1.15rem);
+    line-height: 1.75;
+    color: var(--text-dim);
+}
+
+/* ---- CTA ---- */
+.cta {
+    display: inline-block;
+    padding: 0.85em 2.3em;
+    font-size: clamp(0.78rem, 2.4vw, 0.9rem);
+    font-weight: 400;
+    letter-spacing: 0.28em;
+    text-indent: 0.28em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--gold-bright);
+    border: 1px solid rgba(217, 178, 106, 0.45);
+    border-radius: 999px;
+    background: rgba(217, 178, 106, 0.04);
+    transition: color 0.4s ease, background 0.4s ease,
+                border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.cta:hover,
+.cta:focus-visible {
+    color: #120f08;
+    background: linear-gradient(100deg, var(--gold) 0%, var(--gold-bright) 100%);
+    border-color: var(--gold-bright);
+    box-shadow: 0 10px 34px rgba(217, 178, 106, 0.28);
+    transform: translateY(-2px);
+    outline: none;
+}
+
+/* ---- Footer ---- */
+.footer {
+    position: relative;
+    z-index: 2;
+    margin-top: clamp(2rem, 6vw, 3.25rem);
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    font-size: clamp(0.68rem, 2.2vw, 0.78rem);
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+}
+
+.footer .domain {
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.footer .sep { color: rgba(217, 178, 106, 0.4); }
+
+/* ---- Motion / accessibility ---- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
