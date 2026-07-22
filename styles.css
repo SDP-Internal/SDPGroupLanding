@@ -91,14 +91,21 @@ body {
 
 /* ---- Logo ---- */
 .logo-wrap {
-    width: clamp(248px, 60vw, 432px);
+    width: clamp(260px, 60vw, 440px);
+    aspect-ratio: 1.92 / 1;   /* crop the tall transparent halo padding */
+    overflow: hidden;
     line-height: 0;
-    margin: clamp(-0.8rem, -2.5vw, -0.2rem) 0 clamp(0.2rem, 1vw, 0.7rem);
+    margin: 0 0 clamp(0.4rem, 1.5vw, 1rem);
+    /* Feather the crop edges so the halo melts into the background. */
+    -webkit-mask-image: radial-gradient(ellipse 74% 64% at 50% 50%, #000 52%, transparent 100%);
+    mask-image: radial-gradient(ellipse 74% 64% at 50% 50%, #000 52%, transparent 100%);
 }
 
 .logo {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
     /* Source art carries a warm dark base; screen blend drops it and
        lets only the gold mark + soft halo glow over our background. */
     mix-blend-mode: screen;
@@ -125,10 +132,12 @@ body {
     margin: 0;
     font-family: "Cormorant Garamond", Georgia, serif;
     font-weight: 400;
-    font-size: clamp(2.15rem, 9.2vw, 5.4rem);
-    line-height: 1.04;
-    letter-spacing: 0.03em;
+    font-size: clamp(1.95rem, 8.6vw, 5.4rem);
+    line-height: 1.05;
+    letter-spacing: 0.02em;
     max-width: 100%;
+    overflow-wrap: break-word;
+    text-wrap: balance;
     background: linear-gradient(100deg,
         var(--gold-deep) 0%,
         var(--gold-bright) 28%,
@@ -176,11 +185,12 @@ body {
 
 .tagline {
     margin: 0 0 clamp(2.2rem, 6vw, 2.8rem);
-    max-width: 30ch;
+    max-width: 34ch;
     font-weight: 300;
-    font-size: clamp(0.95rem, 3vw, 1.15rem);
+    font-size: clamp(0.92rem, 3vw, 1.15rem);
     line-height: 1.75;
     color: var(--text-dim);
+    text-wrap: balance;
 }
 
 /* ---- CTA ---- */

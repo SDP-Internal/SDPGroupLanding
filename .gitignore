@@ -40,3 +40,6 @@ node_modules/
 dist/
 .parcel-cache/
 .vite/
+
+# Local design previews
+preview-*.png
