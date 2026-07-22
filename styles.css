@@ -18,7 +18,10 @@
 *::before,
 *::after { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; }
+html {
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
+}
 
 body {
     margin: 0;
@@ -245,6 +248,11 @@ body {
 }
 
 .footer .sep { color: rgba(217, 178, 106, 0.4); }
+
+@media (max-width: 420px) {
+    .footer { flex-direction: column; gap: 0.45rem; }
+    .footer .sep { display: none; }
+}
 
 /* ---- Motion / accessibility ---- */
 @media (prefers-reduced-motion: reduce) {
